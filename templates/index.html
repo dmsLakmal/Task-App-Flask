@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Task App</title>
+{% endblock %}
+
+
+{% block body %}
+<div class="content" align="center" >
+    <h1>Task App</h1>
+
+    <form action="" method="post">
+        <input type="text" name="content" placeholder="Task" id="content" >
+        <input type="submit" value="Add Task">
+    </form>
+
+    {% if tasks|length < 1 %}
+    <h4>There are no tasks. Create one</h4>
+    {% else %}
+    <table >
+        <tr>
+            <th>Task</th>
+            <th>Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td> {{ task.content }} </td>
+            <td> {{ task.date_created.date() }} </td>
+            <td>
+                <a href="/delete/{{ task.id }}"><input id="delete" type="submit" value="Delete"></a>            
+                <a href="/update/{{ task.id }}"><input id="edit" type="submit" value="Edit"></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    
+</div>
+{% endblock %}
